@@ -1,4 +1,4 @@
-package Task2;
+package X5_Lesson3.Task2;
 
 public class Doctor {
     void threadAnimal(Animal animal) {

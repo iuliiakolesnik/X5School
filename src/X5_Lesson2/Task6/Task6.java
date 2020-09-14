@@ -1,3 +1,5 @@
+package X5_Lesson2.Task6;
+
 import java.util.*;
 
 public class Task6 {

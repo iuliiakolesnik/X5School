@@ -1,4 +1,7 @@
+package X5_Lesson2.Task4;
+
 import java.util.*;
+
 
 public class Task4 {
 
