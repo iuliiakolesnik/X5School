@@ -3,8 +3,6 @@ package X5_Lesson5.Task2;
 
 
 public class CPU extends Characteristic {
-    private String manufacturer;
-    private int volume;
     private double coreSpeed;
     private int coreCount;
     private String model;

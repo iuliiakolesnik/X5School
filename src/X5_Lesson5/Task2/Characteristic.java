@@ -12,12 +12,13 @@ public class Characteristic {
         return this.manufacturer;
     }
 
-    public int getVolume() {
-        return this.volume;
-    }
 
     public void setVolume(int volume) {
         this.volume = volume;
+    }
+
+    public int getVolume() {
+        return this.volume;
     }
 
     Characteristic(String manufacturer, int volume) {
