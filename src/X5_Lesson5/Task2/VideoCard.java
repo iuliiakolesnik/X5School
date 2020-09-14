@@ -1,21 +1,22 @@
 package X5_Lesson5.Task2;
 //Характеристики видеокарты: производитель, тип памяти, объем памяти, охлаждение(активное или пассивное).
 
-public class VideoCard {
-    private String manufacturer;
+public class VideoCard extends Characteristic {
     private String type;
-    private int volume;
     private String freeze;
 
     public VideoCard() {
-        this.manufacturer = "test";
+        super("test", 100);
         this.type = "КЭШ";
-        this.volume = 100;
         this.freeze = "Активное";
     }
 
     public String getManufacturer(){
-        return this.manufacturer;
+        return super.getManufacturer();
+    }
+
+    public String getType(){
+        return this.type;
     }
 
     public void play() {

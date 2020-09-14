@@ -1,16 +1,13 @@
 package X5_Lesson5.Task2;
 //Характеристики оперативной памяти: производитель, объем памяти, частота, тип памяти.
 
-public class Memmory {
-    private String manufacturer;
-    private int volume;
+public class Memmory extends Characteristic {
     private double memmoryCount;
     private String memmoryType;
 
     public Memmory()
     {
-        this.manufacturer = "Intel";
-        this.volume = 126;
+        super("Test1", 32);
         this.memmoryCount = 15;
         this.memmoryType = "КЭШ";
     }

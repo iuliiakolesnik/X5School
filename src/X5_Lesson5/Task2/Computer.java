@@ -26,8 +26,8 @@ public class Computer {
 
     public void test()
     {
-        System.out.println("Тестирование процессора: " + cpu.getModel() + " начато");
-        System.out.println("Тестирование процессора: " + cpu.getModel() + " завершено");
+        System.out.println("Тестирование процессора: " + cpu.getModel() + " жесткого диска от " + hardDrive.getManufacturer() + " памяти с объемом " + memmory.getVolume() + " и видеокартой с типом " + videoCard.getType() + " начато...");
+        System.out.println("Завершено");
     }
 
     public void turnOff()
