@@ -1,27 +1,27 @@
-package Task1;
+package X5_Lesson3.Task1;
 
 public class Phone {
     private String model;
     private String number;
     private double weight;
 
-    Phone(){
+    public Phone(){
         this.model = "none";
         this.number = "none";
         this.weight = 0;
     }
 
-    Phone(String model, String number) {
+    public Phone(String model, String number) {
         this.model = model;
         this.number = number;
     }
 
-    Phone(String model, String number, double weight) {
+    public Phone(String model, String number, double weight) {
         this(model, number);
         this.weight = weight;
     }
 
-    String getNumber() {
+    public String getNumber() {
         return this.number;
     }
 

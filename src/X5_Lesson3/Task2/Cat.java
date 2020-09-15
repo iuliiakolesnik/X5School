@@ -19,7 +19,7 @@ public class Cat extends Animal {
         System.out.println("Кошка ест");
     }
 
-    Cat(String food, String location, String color) {
+    public Cat(String food, String location, String color) {
         super(food, location);
         this.color = color;
     }

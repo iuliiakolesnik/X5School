@@ -19,7 +19,7 @@ public class Horse extends Animal {
         System.out.println("Лошадь ест");
     }
 
-    Horse(String food, String location, int winCount) {
+    public Horse(String food, String location, int winCount) {
         super(food, location);
         this.winCount = winCount;
     }

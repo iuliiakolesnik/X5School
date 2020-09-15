@@ -1,4 +1,4 @@
-package Task3;
+package X5_Lesson3.Task3;
 
 public class Student {
     private String firstName;
@@ -18,7 +18,7 @@ public class Student {
         return this.averageMark;
     }
 
-    Student(String firstName, String lastName, String group, double averageMark) {
+    public Student(String firstName, String lastName, String group, double averageMark) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.group = group;

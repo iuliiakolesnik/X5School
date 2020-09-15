@@ -1,4 +1,4 @@
-package Task3;
+package X5_Lesson3.Task3;
 
 public class Aspirant extends Student {
     private boolean scienceWork;
@@ -11,7 +11,7 @@ public class Aspirant extends Student {
         }
     }
 
-    Aspirant(String firstName, String lastName, String group, double averageMark, boolean scienceWork) {
+    public Aspirant(String firstName, String lastName, String group, double averageMark, boolean scienceWork) {
         super(firstName, lastName, group, averageMark);
         this.scienceWork = scienceWork;
     }

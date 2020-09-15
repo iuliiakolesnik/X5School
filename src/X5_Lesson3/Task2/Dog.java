@@ -19,7 +19,7 @@ public class Dog extends Animal {
         System.out.println("Собака ест");
     }
 
-    Dog(String food, String location, String breed) {
+    public Dog(String food, String location, String breed) {
         super(food, location);
         this.breed = breed;
     }

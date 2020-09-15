@@ -1,4 +1,4 @@
-package Task3;
+package X5_Lesson3.Task3;
 
 import java.util.*;
 
