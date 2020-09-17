@@ -47,7 +47,8 @@ public class Box {
 
     public void printBox() {
         for (Fruit f : fruitArrayList) {
-            System.out.print(f + " ");
+            System.out.print(f + ": ");
+            f.printInfo();
         }
         System.out.println();
     }

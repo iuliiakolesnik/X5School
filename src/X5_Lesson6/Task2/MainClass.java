@@ -28,7 +28,7 @@ public class MainClass {
         box_orange.printBox();
         box_orange.addFruit(apple);
 
-        System.out.println("ВЕС коробки c яблоками: " + box_apple.getWeight());
+        System.out.println("Вес коробки c яблоками: " + box_apple.getWeight());
         System.out.println("Вес коробки с апельсинами: " + box_orange.getWeight());
 
         if (box_apple.compare(box_orange)){

@@ -7,6 +7,6 @@ public class Apple extends Fruit{
     }
 
     public void printInfo(){
-        System.out.println("Яблоки");
+        System.out.print("Яблоко ");
     }
 }

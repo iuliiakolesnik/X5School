@@ -7,6 +7,6 @@ public class Orange extends Fruit {
     }
 
     public void printInfo() {
-        System.out.println("Апельсины");
+        System.out.print("Апельсин ");
     }
 }

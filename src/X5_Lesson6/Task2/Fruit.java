@@ -9,7 +9,7 @@ public class Fruit {
     }
 
     public void printInfo(){
-        System.out.println("Фруктики");
+        System.out.print("Фруктики ");
     }
 
     public double getWeight(){
