@@ -6,11 +6,11 @@ public class Box {
     private ArrayList<Fruit> fruitArrayList;
 
     public Box() {
-        fruitArrayList = new ArrayList<Fruit>();
+        this.fruitArrayList = new ArrayList<Fruit>();
     }
 
     public boolean checkEmptyBox() {
-        if (fruitArrayList.size() == 0) {
+        if (this.fruitArrayList.size() == 0) {
             return true;
         } else {
             return false;
@@ -18,7 +18,7 @@ public class Box {
     }
 
     public boolean checkBox(Fruit f) {
-        if (fruitArrayList.get(0).getClass() == f.getClass()) {
+        if (this.fruitArrayList.get(0).getClass() == f.getClass()) {
             return true;
         } else {
             return false;
@@ -26,10 +26,10 @@ public class Box {
     }
 
     public void addFruit(Fruit f) {
-        if (checkEmptyBox()) {
+        if (this.checkEmptyBox()) {
             this.fruitArrayList.add(f);
         } else {
-            if (checkBox(f)) {
+            if (this.checkBox(f)) {
                 this.fruitArrayList.add(f);
             } else {
                 System.out.println("В коробке лежат другие фрукты");
@@ -39,15 +39,8 @@ public class Box {
 
     public double getWeight() {
         double weight = 0;
-        if (fruitArrayList.get(0).getClass() == Apple.class) {
-            for (Fruit f : fruitArrayList){
-                weight = weight + f.getWeight();
-            }
-        }
-        if (fruitArrayList.get(0).getClass() == Orange.class) {
-            for (Fruit f : fruitArrayList){
-                weight = weight + f.getWeight();
-            }
+        for (Fruit f : this.fruitArrayList){
+            weight = weight + f.getWeight();
         }
         return weight;
     }
