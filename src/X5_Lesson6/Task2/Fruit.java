@@ -2,17 +2,17 @@ package X5_Lesson6.Task2;
 
 public class Fruit {
 
-    private double weight;
+    private float weight;
 
-    public Fruit(double weight){
+    public Fruit(float weight) {
         this.weight = weight;
     }
 
-    public void printInfo(){
+    public void printInfo() {
         System.out.print("Фруктики ");
     }
 
-    public double getWeight(){
+    public float getWeight() {
         return this.weight;
     }
 }

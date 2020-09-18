@@ -29,8 +29,8 @@ public class Box {
         }
     }
 
-    public double getWeight() {
-        double total_weight = 0;
+    public float getWeight() {
+        float total_weight = 0.0f;
         for (Fruit f : this.fruitArrayList) {
             total_weight = total_weight + f.getWeight();
         }

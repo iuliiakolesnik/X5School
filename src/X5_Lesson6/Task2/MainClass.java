@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class MainClass {
     public static void main(String[] args) {
-        Fruit apple = new Apple(1);
-        Fruit apple1 = new Apple(2);
-        Fruit apple2 = new Apple(3);
-        Fruit orange = new Orange(1);
-        Fruit orange1 = new Orange(2);
-        Fruit orange2 = new Orange(2);
+        Fruit apple = new Apple();
+        Fruit apple1 = new Apple(1.5f);
+        Fruit apple2 = new Apple(2.0f);
+        Fruit orange = new Orange();
+        Fruit orange1 = new Orange();
+        Fruit orange2 = new Orange();
 
         Box box_apple = new Box();
         Box box_orange = new Box();
@@ -31,9 +31,9 @@ public class MainClass {
         System.out.println("Вес коробки c яблоками: " + box_apple.getWeight());
         System.out.println("Вес коробки с апельсинами: " + box_orange.getWeight());
 
-        if (box_apple.compare(box_orange)){
+        if (box_apple.compare(box_orange)) {
             System.out.println("Коробки одинакового веса");
-        } else{
+        } else {
             System.out.println("Коробки разного веса");
         }
         System.out.println("Из коробки с яблоками в коробку с апельсинами");
@@ -55,9 +55,5 @@ public class MainClass {
         box_orange.printBox();
         System.out.println("Ранее пустая коробка теперь с яблоками");
         box_empty.printBox();
-
-        //box.printBox();
-
-
     }
 }
