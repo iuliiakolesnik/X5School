@@ -26,6 +26,12 @@ public class AccountServiceImpl implements AccountService {
         return this.accountList;
     }
 
+    public void printInfo() {
+        for (Account account : this.accountList) {
+            account.printInfo();
+        }
+    }
+
     public boolean checkAccount(int accountId) {
         boolean finded = false;
         for (Account account : this.accountList) {
@@ -97,5 +103,48 @@ public class AccountServiceImpl implements AccountService {
     public void transfer(int from, int to, int amount) throws NotEnoughMoneyException, UnknownAccountException {
         withdraw(from, amount);
         deposit(to, amount);
+    }
+
+    public void operation() throws NotEnoughMoneyException, UnknownAccountException {
+        int accountId, amount;
+
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Enter operation (balance, withdraw, deposit, transfer): ");
+        String operation = reader.nextLine();
+
+        switch (operation) {
+            case "balance":
+                System.out.println("Enter accountID: ");
+                accountId = reader.nextInt();
+                balance(accountId);
+                break;
+            case "withdraw":
+                System.out.println("Enter accountID and Amount ");
+                accountId = reader.nextInt();
+                amount = reader.nextInt();
+                withdraw(accountId, amount);
+                balance(accountId);
+                break;
+            case "deposit":
+                System.out.println("Enter accountID and Amount ");
+                accountId = reader.nextInt();
+                amount = reader.nextInt();
+                deposit(accountId, amount);
+                balance(accountId);
+                break;
+            case "transfer":
+                System.out.println("Enter accountID from and account to and Amount ");
+                int accountIdFrom = reader.nextInt();
+                int accountIdTo = reader.nextInt();
+                amount = reader.nextInt();
+                transfer(accountIdFrom, accountIdTo, amount);
+                balance(accountIdFrom);
+                balance(accountIdTo);
+                break;
+            default:
+                System.out.println("Please try again. We don't recognize operation.");
+                operation();
+        }
+
     }
 }
