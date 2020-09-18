@@ -10,19 +10,11 @@ public class Box {
     }
 
     public boolean checkEmptyBox() {
-        if (this.fruitArrayList.size() == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return (this.fruitArrayList.size() == 0);
     }
 
     public boolean checkBox(Fruit f) {
-        if (this.fruitArrayList.get(0).getClass() == f.getClass()) {
-            return true;
-        } else {
-            return false;
-        }
+        return (this.fruitArrayList.get(0).getClass() == f.getClass());
     }
 
     public void addFruit(Fruit f) {
@@ -38,11 +30,11 @@ public class Box {
     }
 
     public double getWeight() {
-        double weight = 0;
-        for (Fruit f : this.fruitArrayList){
-            weight = weight + f.getWeight();
+        double total_weight = 0;
+        for (Fruit f : this.fruitArrayList) {
+            total_weight = total_weight + f.getWeight();
         }
-        return weight;
+        return total_weight;
     }
 
     public void printBox() {
@@ -54,25 +46,16 @@ public class Box {
     }
 
     public boolean compare(Box b) {
-        if (this.getWeight() == b.getWeight()) {
-            return true;
-        } else {
-            return false;
-        }
+        return (this.getWeight() == b.getWeight());
     }
 
-    public void moveFruit(Box b)
-    {
-        if(b.checkEmptyBox()){
-            for (Fruit f: this.fruitArrayList){
-                b.fruitArrayList.add(f);
-            }
+    public void moveFruit(Box b) {
+        if (b.checkEmptyBox()) {
+            b.fruitArrayList.addAll(this.fruitArrayList);
             this.fruitArrayList.clear();
         } else {
-            if (this.fruitArrayList.get(0).getClass() == b.fruitArrayList.get(0).getClass()){
-                for (Fruit f: this.fruitArrayList){
-                    b.fruitArrayList.add(f);
-                }
+            if (this.fruitArrayList.get(0).getClass() == b.fruitArrayList.get(0).getClass()) {
+                b.fruitArrayList.addAll(this.fruitArrayList);
                 this.fruitArrayList.clear();
             } else {
                 System.out.println("В коробках разные фрукты");
