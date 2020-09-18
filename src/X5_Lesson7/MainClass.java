@@ -1,7 +1,6 @@
 package X5_Lesson7;
 
 import java.io.IOException;
-import java.util.*;
 
 public class MainClass {
     public static void main(String[] args) throws IOException {
