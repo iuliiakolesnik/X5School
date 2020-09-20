@@ -5,7 +5,7 @@ public class Rectangle implements Shape {
     private double length;
     private double height;
 
-    Rectangle(double length, double height) {
+    public Rectangle(double length, double height) {
         this.height = height;
         this.length = length;
     }

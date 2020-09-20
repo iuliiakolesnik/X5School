@@ -6,7 +6,7 @@ public class Lorry extends Car {
 
     private double liftingCapacity;
 
-    Lorry(String model, String carClass, double weight, Engine engine, double liftingCapacity) {
+    public Lorry(String model, String carClass, double weight, Engine engine, double liftingCapacity) {
         super(model, carClass, weight, engine);
         this.liftingCapacity = liftingCapacity;
     }

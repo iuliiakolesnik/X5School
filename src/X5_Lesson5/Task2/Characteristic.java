@@ -21,7 +21,7 @@ public class Characteristic {
         return this.volume;
     }
 
-    Characteristic(String manufacturer, int volume) {
+    public Characteristic(String manufacturer, int volume) {
         this.manufacturer = manufacturer;
         this.volume = volume;
     }

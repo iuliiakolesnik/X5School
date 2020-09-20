@@ -14,7 +14,7 @@ public class Engine {
         return this.manufacturer;
     }
 
-    Engine(String power, String manufacturer) {
+    public Engine(String power, String manufacturer) {
         this.power = power;
         this.manufacturer = manufacturer;
     }
