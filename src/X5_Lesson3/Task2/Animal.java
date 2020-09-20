@@ -20,19 +20,19 @@ public class Animal {
         this.location = location;
     }
 
-    void makeNoise() {
+    public void makeNoise() {
         System.out.println("Такое-то животное шумит");
     }
 
-    void eat() {
+    public void eat() {
         System.out.println("Такое-то животное ест");
     }
 
-    void sleep() {
+    public void sleep() {
         System.out.println("Такое-то животное спит");
     }
 
-    Animal(String food, String location) {
+    public Animal(String food, String location) {
         this.food = food;
         this.location = location;
     }

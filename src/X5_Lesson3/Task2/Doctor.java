@@ -1,7 +1,7 @@
 package X5_Lesson3.Task2;
 
 public class Doctor {
-    void threadAnimal(Animal animal) {
+    public void threadAnimal(Animal animal) {
         System.out.println("Food: " + animal.getFood() + " Location: " + animal.getLocation());
     }
 }

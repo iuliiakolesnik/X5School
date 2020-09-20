@@ -11,11 +11,11 @@ public class Cat extends Animal {
         this.color = color;
     }
 
-    void makeNoise() {
+    public void makeNoise() {
         System.out.println("Кошка шумит");
     }
 
-    void eat() {
+    public void eat() {
         System.out.println("Кошка ест");
     }
 

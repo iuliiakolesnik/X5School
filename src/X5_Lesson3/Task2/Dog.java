@@ -11,11 +11,11 @@ public class Dog extends Animal {
         this.breed = breed;
     }
 
-    void makeNoise() {
+    public void makeNoise() {
         System.out.println("Собака шумит");
     }
 
-    void eat() {
+    public void eat() {
         System.out.println("Собака ест");
     }
 
