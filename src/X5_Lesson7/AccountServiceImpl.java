@@ -9,9 +9,20 @@ public class AccountServiceImpl implements AccountService {
 
     public AccountServiceImpl(String file) throws IOException {
         File f = new File(file);
-        BufferedReader reader = new BufferedReader(new FileReader(f));
+        if (!f.exists()) {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(f));
+            for (int i = 1; i <= 10; i++) {
+                String info = i + "," + "name" + i + "," + (i * 100);
+                writer.write(info);
+                writer.newLine();
+            }
+            writer.close();
+        }
 
+        BufferedReader reader = new BufferedReader(new FileReader(f));
         String bufLine;
+
+        System.out.println("Y");
 
         while ((bufLine = reader.readLine()) != null) {
             String[] accountInfo = bufLine.split("\n");
@@ -115,8 +126,8 @@ public class AccountServiceImpl implements AccountService {
         switch (operation) {
             case "balance":
                 System.out.println("Enter accountID: ");
-                accountId = reader.nextInt();
-                balance(accountId);
+                // accountId = reader.nextInt();
+                balance(reader.nextInt());
                 break;
             case "withdraw":
                 System.out.println("Enter accountID and Amount ");
