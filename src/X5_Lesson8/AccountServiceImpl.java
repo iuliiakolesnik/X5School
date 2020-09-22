@@ -1,7 +1,8 @@
-package X5_Lesson7;
+package X5_Lesson8;
 
-import java.util.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class AccountServiceImpl implements AccountService {
 
@@ -21,6 +22,8 @@ public class AccountServiceImpl implements AccountService {
 
         BufferedReader reader = new BufferedReader(new FileReader(f));
         String bufLine;
+
+        System.out.println("Y");
 
         while ((bufLine = reader.readLine()) != null) {
             String[] accountInfo = bufLine.split("\n");
