@@ -1,123 +1,144 @@
 package X5_Lesson8;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
+import java.sql.*;
+
 
 public class AccountServiceImpl implements AccountService {
 
-    private ArrayList<Account> accountList = new ArrayList<Account>();
+    //private ArrayList<Account> accountList = new ArrayList<Account>();
+    private static String dbUrl;
+    private static String user;
+    private static String pass;
 
-    public AccountServiceImpl(String file) throws IOException {
-        File f = new File(file);
-        if (!f.exists()) {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(f));
-            for (int i = 1; i <= 10; i++) {
-                String info = i + "," + "name" + i + "," + (i * 100);
-                writer.write(info);
-                writer.newLine();
-            }
-            writer.close();
-        }
+    private Connection connection = null;
 
-        BufferedReader reader = new BufferedReader(new FileReader(f));
-        String bufLine;
 
-        System.out.println("Y");
+    public AccountServiceImpl(String dbUrl, String user, String pass) {
+        this.dbUrl = dbUrl;
+        this.user = user;
+        this.pass = pass;
 
-        while ((bufLine = reader.readLine()) != null) {
-            String[] accountInfo = bufLine.split("\n");
-            for (String line : accountInfo) {
-                String[] accountSubInfo = line.split(",");
-                this.accountList.add(new Account(Integer.parseInt(accountSubInfo[0]), accountSubInfo[1], Integer.parseInt(accountSubInfo[2])));
-            }
+        try {
+            this.connection = DriverManager.getConnection(dbUrl, user, pass);
+        } catch (SQLException e) {
+            System.out.println("Connection Failed");
+            e.printStackTrace();
         }
     }
 
-    public ArrayList<Account> getAccountList() {
-        return this.accountList;
+    public Connection getConnection() {
+        return this.connection;
     }
 
-    public void printInfo() {
-        for (Account account : this.accountList) {
-            account.printInfo();
-        }
-    }
-
-    public boolean checkAccount(int accountId) {
-        boolean finded = false;
-        for (Account account : this.accountList) {
-            if (account.getId() == accountId) {
-                finded = true;
+    public void printInfo() throws SQLException {
+        if (this.connection != null) {
+            ResultSet resultSet;
+            Statement statement = this.connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM public.Account");
+            while (resultSet.next()) {
+                System.out.println(resultSet.getInt("employee_id") + " " + resultSet.getString("holder") + " " + resultSet.getInt("amount"));
             }
+            statement.close();
+        } else {
+            System.out.println("Failed to make connection to database");
         }
-        return finded;
-    }
-
-    public int getBalance(int accountId) {
-        int balance = 0;
-        for (Account account : this.accountList) {
-            if (account.getId() == accountId) {
-                balance = account.getAmount();
-            }
-        }
-        return balance;
     }
 
     @Override
-    public void withdraw(int accountId, int amount) throws NotEnoughMoneyException, UnknownAccountException {
-        if (!checkAccount(accountId) || getBalance(accountId) - amount < 0) {
-            if (!checkAccount(accountId)) {
-                throw new UnknownAccountException("Unknown holder");
+    public void balance(int accountId) throws UnknownAccountException, SQLException {
+        if (this.connection != null) {
+            ResultSet resultSet;
+
+            String select = "SELECT * FROM public.Account where employee_id = ? ";
+            PreparedStatement statement = this.connection.prepareStatement(select);
+            statement.setInt(1, accountId);
+            statement.execute();
+            resultSet = statement.getResultSet();
+
+            if (resultSet.next()) {
+                System.out.println(resultSet.getInt("employee_id") + " " + resultSet.getString("holder") + " " + resultSet.getInt("amount"));
             } else {
-                throw new NotEnoughMoneyException("Not Enough Money");
-            }
-        } else {
-            for (Account account : accountList) {
-                if (account.getId() == accountId) {
-                    account.setAmount(account.getAmount() - amount);
-                }
-            }
-        }
-    }
-
-    @Override
-    public void balance(int accountId) throws UnknownAccountException {
-        if (!checkAccount(accountId)) {
-            throw new UnknownAccountException("Unknown holder");
-        } else {
-            for (Account account : this.accountList) {
-                if (account.getId() == accountId) {
-                    System.out.println("Balance for holder " + account.getHolder() + " is " + account.getAmount());
-                }
-            }
-        }
-    }
-
-    @Override
-    public void deposit(int accountId, int amount) throws NotEnoughMoneyException, UnknownAccountException {
-        if (!checkAccount(accountId) || amount == 0) {
-            if (!checkAccount(accountId)) {
                 throw new UnknownAccountException("Unknown holder");
-            } else {
-                throw new NotEnoughMoneyException("Not Enough Money");
             }
+            statement.close();
         } else {
-            for (Account account : accountList) {
-                if (account.getId() == accountId) {
-                    account.setAmount(account.getAmount() + amount);
+            System.out.println("Failed to make connection to database");
+        }
+
+    }
+
+    @Override
+    public void withdraw(int accountId, int amount) throws NotEnoughMoneyException, UnknownAccountException, SQLException {
+        if (this.connection != null) {
+            ResultSet resultSet;
+            String select = "SELECT * FROM public.Account where employee_id = ? ";
+            PreparedStatement statement = this.connection.prepareStatement(select);
+            statement.setInt(1, accountId);
+            statement.execute();
+            resultSet = statement.getResultSet();
+
+            if (resultSet.next()) {
+                int accountAmount = resultSet.getInt("amount");
+                if (accountAmount < amount) {
+                    throw new NotEnoughMoneyException("Not Enough Money");
+                } else {
+                    // int accountAmount = resultSet.getInt("amount");
+                    String selectUpdate = "UPDATE public.Account SET amount=? WHERE employee_id=?";
+                    PreparedStatement statementUpdate = this.connection.prepareStatement(selectUpdate);
+                    statementUpdate.setInt(1, accountAmount - amount);
+                    statementUpdate.setInt(2, accountId);
+                    statementUpdate.execute();
+                    statementUpdate.close();
                 }
+            } else {
+                throw new UnknownAccountException("Unknown holder");
             }
+            statement.close();
+        } else {
+            System.out.println("Failed to make connection to database");
         }
     }
 
     @Override
-    public void transfer(int from, int to, int amount) throws NotEnoughMoneyException, UnknownAccountException {
+    public void deposit(int accountId, int amount) throws NotEnoughMoneyException, UnknownAccountException, SQLException {
+        if (this.connection != null) {
+            ResultSet resultSet;
+            String select = "SELECT * FROM public.Account where employee_id = ? ";
+            PreparedStatement statement = this.connection.prepareStatement(select);
+            statement.setInt(1, accountId);
+            statement.execute();
+            resultSet = statement.getResultSet();
+
+            if (resultSet.next()) {
+                if (amount == 0) {
+                    throw new NotEnoughMoneyException("Not Enough Money");
+                } else {
+                    int accountAmount = resultSet.getInt("amount");
+                    String selectUpdate = "UPDATE public.Account SET amount=? WHERE employee_id=?";
+                    PreparedStatement statementUpdate = this.connection.prepareStatement(selectUpdate);
+                    statementUpdate.setInt(1, accountAmount + amount);
+                    statementUpdate.setInt(2, accountId);
+                    statementUpdate.execute();
+                    statementUpdate.close();
+                }
+            } else {
+                throw new UnknownAccountException("Unknown holder");
+            }
+            statement.close();
+        } else {
+            System.out.println("Failed to make connection to database");
+        }
+    }
+
+    @Override
+    public void transfer(int from, int to, int amount) throws NotEnoughMoneyException, UnknownAccountException, SQLException {
         withdraw(from, amount);
         deposit(to, amount);
     }
 
-    public void operation() throws NotEnoughMoneyException, UnknownAccountException {
+    public void operation() throws NotEnoughMoneyException, UnknownAccountException, SQLException {
         int accountId, amount;
 
         Scanner reader = new Scanner(System.in);
@@ -157,6 +178,8 @@ public class AccountServiceImpl implements AccountService {
                 System.out.println("Please try again. We don't recognize operation.");
                 operation();
         }
+
+        this.connection.close();
 
     }
 }

@@ -1,0 +1,7 @@
+Create Table
+CREATE TABLE  public.Account (
+employee_id integer,
+holder character(32),
+amount integer
+);
+
