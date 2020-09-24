@@ -4,7 +4,7 @@ public class Aspirant extends Student {
     private boolean scienceWork;
 
     public int getScholarship() {
-        if (super.getAverageMark() == 5) {
+        if (averageMark == 5) {
             return 200;
         } else {
             return 180;
