@@ -26,21 +26,33 @@ public class MainClass {
     //  Database credentials
 
 
+    public static void main(String[] argv) throws SQLException {
 
-    public static void main(String[] argv) throws SQLException{
+      /*  try {
+            Class.forName("org.h2.Driver");
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }*/
 
-        String table = "Account";
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:h2:mem:test");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+       /* String table = "Account";
         String dbUrl = "jdbc:postgresql://localhost/Account";
         String user = "postgres";
         String pass = "Pummel!1";
 
-        AccountServiceImpl accountService = new AccountServiceImpl(dbUrl,user,pass);
+        AccountServiceImpl accountService = new AccountServiceImpl(dbUrl, user, pass);
         accountService.printInfo();
 
         try {
             accountService.operation();
         } catch (UnknownAccountException | NotEnoughMoneyException ex) {
             System.out.println(ex.getMessage());
-        }
+        }*/
     }
 }
